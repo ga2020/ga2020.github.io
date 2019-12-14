@@ -57,7 +57,9 @@ var id1=	$("#id").val();
 	
 	
     	var url = script_url+"?data="+data+"&id="+id1+"&action=insert";
-	fetch(url)
+	fetch(url, {
+	  mode: 'no-cors' // 'cors' by default
+	})
 		.then((response) => response.json())
 		.then((json) => {
 			if (json.result.startsWith("fail")) {
@@ -88,7 +90,9 @@ var id1=	$("#id").val();
 	
 	
     	var url = script_url+"?data="+data+"&id="+id1+"&action=update";
-	fetch(url)
+	fetch(url, {
+	  mode: 'no-cors' // 'cors' by default
+	})
 		.then((response) => response.json())
 		.then((json) => {
 			if (json.result.startsWith("fail")) {
@@ -117,7 +121,9 @@ var id1=	$("#id").val();
 	
 	
     	var url = script_url+"?data="+data+"&id="+id1+"&action=delete";
-	fetch(url)
+	fetch(url, {
+	  mode: 'no-cors' // 'cors' by default
+	})
 		.then((response) => response.json())
 		.then((json) => {
 			if (json.result.startsWith("fail")) {
@@ -154,7 +160,9 @@ $("#re").css("visibility","hidden");
    document.getElementById("loader").style.visibility = "visible";
  var url = script_url+"?action=read";
 
- fetch(url)
+ fetch(url, {
+	  mode: 'no-cors' // 'cors' by default
+	})
 		.then((response) => response.json())
 		.then((json) => {
 			if (json.result.startsWith("fail")) {
