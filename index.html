@@ -152,17 +152,17 @@ $("#re").css("visibility","hidden");
    document.getElementById("loader").style.visibility = "visible";
  var url = script_url+"?action=read";
 
-$.getJSON(url, function (json) {
-
-    // Set the variables from the results array
-   
-   
+ fetch(url)
+		.then((response) => response.json())
+		.then((json) => {
+			if (json.result.startsWith("fail")) {
+				showToast(json.result);
+			}
+			
+		// Set the variables from the results array
   
-
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
-
-		
 
         var header = table.createTHead();
 		var row = header.insertRow(0);     
@@ -173,13 +173,13 @@ $.getJSON(url, function (json) {
 		cell2.innerHTML = "<b>DATA</b>";
         
         // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < json.records.length; i++) {
+        for (var i = 0; i < json.result.records.length; i++) {
 
             tr = table.insertRow(-1);
 				var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = json.records[i].ID;
+                tabCell.innerHTML = json.result.records[i].ID;
 				tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = json.records[i].NAME;
+				tabCell.innerHTML = json.result.records[i].NAME;
             }
       
 
@@ -189,7 +189,12 @@ $.getJSON(url, function (json) {
         divContainer.appendChild(table);
 		document.getElementById("loader").style.visibility = "hidden";
 		$("#re").css("visibility","visible");
-    });
+		})
+		.catch((error) => {
+			showToast('Unexpected error loading posts');
+		}) 
+ 
+
 	}
   
   </script>
@@ -201,7 +206,7 @@ $.getJSON(url, function (json) {
 <body>
 <div id="snackbar"></div>
 <div align="center">
-<h1>CRUD OPERATION ON GOOGLE SPREAD SHEET, WEB APPLICATION USING GOOGLE APP SCRIPT .</h1> 
+<h2>CRUD OPERATION ON GOOGLE SPREAD SHEET, WEB APPLICATION USING GOOGLE APP SCRIPT .</h2> 
 <p>This is simple application, You can develop your own logic based on your requiremnets.<p>
 <p>Be careful with the parameters you are sending, it should match the parameters that are recived in google app script.</p>
 
@@ -229,4 +234,7 @@ Data (splited by |)
 <div align="center">
 <p>ANDROID LABS 2017 | All Rights Reserved</p>
 </div>
+<script>
+read_value();
+  </script>
 <html>
