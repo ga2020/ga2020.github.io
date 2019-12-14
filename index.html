@@ -1,5 +1,7 @@
 <html>
 <head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
         table, th, td 
         {
@@ -64,7 +66,7 @@ var id1=	$("#id").val();
 			ctrlq(json);
 		})
 		.catch((error) => {
-			showToast('Unexpected error loading posts');
+			showToast('Unexpected error loading database');
 		})
 
   }
@@ -95,7 +97,7 @@ var id1=	$("#id").val();
 			ctrlq(json);
 		})
 		.catch((error) => {
-			showToast('Unexpected error loading posts');
+			showToast('Unexpected error loading database');
 		})  
 
 
@@ -124,7 +126,7 @@ var id1=	$("#id").val();
 			ctrlq(json);
 		})
 		.catch((error) => {
-			showToast('Unexpected error loading posts');
+			showToast('Unexpected error loading database');
 		}) 
 
   }
@@ -156,7 +158,7 @@ $("#re").css("visibility","hidden");
 		.then((response) => response.json())
 		.then((json) => {
 			if (json.result.startsWith("fail")) {
-				showToast(json.result);
+				showToast(json);
 			}
 			
 		// Set the variables from the results array
@@ -173,13 +175,13 @@ $("#re").css("visibility","hidden");
 		cell2.innerHTML = "<b>DATA</b>";
         
         // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < json.result.records.length; i++) {
+        for (var i = 0; i < json.records.length; i++) {
 
             tr = table.insertRow(-1);
 				var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = json.result.records[i].ID;
+                tabCell.innerHTML = json.records[i].ID;
 				tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = json.result.records[i].NAME;
+				tabCell.innerHTML = json.records[i].NAME;
             }
       
 
@@ -191,7 +193,7 @@ $("#re").css("visibility","hidden");
 		$("#re").css("visibility","visible");
 		})
 		.catch((error) => {
-			showToast('Unexpected error loading posts');
+			showToast('Unexpected error loading database');
 		}) 
  
 
